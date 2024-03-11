@@ -1,0 +1,84 @@
+<p-toast></p-toast>
+
+<p-confirmDialog></p-confirmDialog>
+
+<div class="admin-page">
+  <p-card header="Users" subheader="List of all Users">
+    <div class="grid">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-start">
+            <p-button
+              routerLink="/create-user"
+              icon="pi pi-plus"
+              label="New"
+              severity="success"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12">
+        <p-table
+          [value]="users"
+          [paginator]="true"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[5, 10, 20]"
+          styleClass="p-datatable-gridlines"
+          [tableStyle]="{ 'max-width': '120rem' }"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">
+                Name <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th>Email</th>
+              <th>Is Admin</th>
+              <th>Country</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user>
+            <tr>
+              <td>{{ user.name }}</td>
+
+              <td>{{ user.email }}</td>
+              <td>
+                <p-tag
+                  *ngIf="user.isAdmin"
+                  icon="pi pi-check"
+                  severity="success"
+                  [rounded]="true"
+                ></p-tag>
+                <p-tag
+                  *ngIf="!user.isAdmin"
+                  icon="pi pi-times"
+                  severity="danger"
+                  [rounded]="true"
+                ></p-tag>
+              </td>
+              <td>{{ getCountryName(user.country) }}</td>
+
+            
+              <td>
+                <p-button
+                  (click)="deleteUser(user._id)"
+                  styleClass="p-button-danger mr-2"
+                  icon="pi pi-trash"
+                ></p-button>
+                <p-button
+                  (click)="updateUser(user._id)"
+                  styleClass="p-button-success"
+                  icon="pi pi-pencil"
+                ></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>

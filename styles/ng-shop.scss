@@ -1,0 +1,34 @@
+@import './base/colors.scss';
+@import './base/mixins.scss';
+@import './base/fonts.scss';
+
+//import libraries
+@import '~primeng/resources/themes/lara-light-blue/theme.css';
+@import '~primeng/resources/primeng.css';
+@import '~primeicons/primeicons.css';
+@import '~animate.css/animate.css';
+//primeflex
+@import '~primeflex/primeflex.css';
+
+@import './apps/ngShop/header.scss';
+@import './apps/ngShop/footer.scss';
+@import './apps/ngShop/nav.scss';
+
+@import './base/configuration.scss';
+
+@import './libs/products/productsSearch.scss';
+@import './libs/ui/banner.scss';
+@import './libs/products/categoriesBanner.scss';
+@import './libs/products/productItem.scss';
+@import './libs/products/product-page.scss';
+@import './libs/ui/gallery.scss';
+@import './libs/orders/cart.scss';
+@import './libs/orders/order-summary.scss';
+@import './libs/orders/checkout.scss';
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: var(--surface-100);
+}

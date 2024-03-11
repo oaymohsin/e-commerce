@@ -1,0 +1,24 @@
+@import './base/colors.scss';
+@import './base/mixins.scss';
+@import './base/fonts.scss';
+ 
+
+//import libraries
+@import '~primeng/resources/themes/lara-light-blue/theme.css';
+@import '~primeng/resources/primeng.css';
+@import '~primeicons/primeicons.css';
+//primeflex
+@import '~primeflex/primeflex.css';
+
+
+@import './base/configuration.scss';
+
+@import './libs/users/login.scss';
+  
+@import './apps/admin/shell.scss';
+
+ .red-class{
+    color: red;
+   
+    
+}

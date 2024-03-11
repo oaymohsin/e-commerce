@@ -1,0 +1,79 @@
+<p-toast></p-toast>
+
+<p-confirmDialog></p-confirmDialog>
+
+<div class="admin-page">
+  <p-card header="Categories" subheader="List of all Categories">
+    <div class="grid">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-start">
+            <p-button
+              routerLink="/create-category"
+              icon="pi pi-plus"
+              label="New"
+              severity="success"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12">
+        <p-table
+          [value]="categories"
+          styleClass="p-datatable-gridlines"
+          [tableStyle]="{ 'max-width': '120rem' }"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">
+                Name<p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th>icon</th>
+              <th>color</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-Category>
+            <tr>
+              <td>{{ Category.name }}</td>
+              <td>
+                <i
+                  style="font-size: 2rem"
+                  [ngClass]="'pi pi-' + Category.icon"
+                ></i>
+              </td>
+              <td>
+                <i
+                  class="pi pi-circle-on"
+                  style="font-size: 2rem"
+                  [ngStyle]="{ color: Category.color }"
+                ></i>
+              </td>
+
+              <td>
+                <p-button
+                  (click)="deleteCategory(Category.id)"
+                  class="mr-2"
+                  icon="pi pi-trash"
+                  label=""
+                  size="small"
+                  severity="danger"
+                ></p-button>
+                <p-button
+                  (click)="updateCategory(Category.id)"
+                  icon="pi pi-pencil"
+                  label=""
+                  size="small"
+                  severity="primary"
+                ></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>

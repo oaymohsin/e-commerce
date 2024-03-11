@@ -1,0 +1,27 @@
+.checkout-page {
+  min-height: 500px;
+
+//   p-button {
+//     :hover {
+//       background-color: rgb(61, 61, 217);
+//     }
+//   }
+
+  button {
+    background-color: $primary-color;
+    border: 0;
+  }
+
+  .checkout {
+    &-form {
+      margin-top: 25px;
+    }
+
+    &-button {
+      margin-top: 20px;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

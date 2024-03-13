@@ -16,7 +16,9 @@ import { CategoriesBannerComponent, FeaturedProductsComponent, ProductsItemCompo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from './shared/nav/nav.component';
 import { ButtonModule } from 'primeng/button';
-import { CartIconComponent, CheckOutComponent } from '@e-commerce/orders';
+import { CartIconComponent, CheckOutComponent, ThankYouComponent } from '@e-commerce/orders';
+import { LoginComponent } from '@e-commerce/users';
+import { NgxStripeModule } from 'ngx-stripe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,10 @@ import { CartIconComponent, CheckOutComponent } from '@e-commerce/orders';
     ProductsPageComponent,
     GalleryComponent,
     CartIconComponent,
-    CheckOutComponent
+    CheckOutComponent,
+    ThankYouComponent,
+    LoginComponent,
+    NgxStripeModule.forRoot('pk_test_51OtRDuSBR6ewkHIDpLTJc624qoX30grIza7C30DUvROMOdmtLAK9zCORCWDbRbr29VWbGHWmkJ0o7Fi6Bfk2xLcZ009akKk5Eu')
   ],
   providers: [ProductsPageComponent],
   bootstrap: [AppComponent],

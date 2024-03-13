@@ -12,13 +12,14 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { DropdownModule } from 'primeng/dropdown';
 import { OrderSummaryComponent } from '../order-summary/order-summary.component';
 import { Router } from '@angular/router';
-import { UserService } from '@e-commerce/users';
+import { User, UserService } from '@e-commerce/users';
 import { CartService } from '../services/cart.service';
 import { OrdersService } from '../services/orders.service';
 import { Cart } from '../models/cart';
 import { OrderItem } from '../models/order-item';
 import { InputTextModule } from 'primeng/inputtext';
 import { Order } from '../models/orders';
+import { StripeService } from 'ngx-stripe';
 @Component({
   selector: 'e-commerce-check-out',
   standalone: true,
@@ -40,14 +41,15 @@ export class CheckOutComponent implements OnInit {
   isSubmitted = false;
   countries: any = [];
   orderItems: OrderItem[] | any = [];
-  userId = '609d65943373711346c5e950';
+  userId: User | any = '65d57f25c4dbee727caa4466';
 
   constructor(
     private router: Router,
     private userService: UserService,
     private formBuilder: FormBuilder,
     private cartService: CartService,
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private stripeService: StripeService
   ) {}
 
   ngOnInit(): void {
@@ -92,6 +94,7 @@ export class CheckOutComponent implements OnInit {
       return;
     }
 
+   
     const order: Order = {
       orderItems: this.orderItems,
       shippingAddress1: this.checkoutForm.street.value,
@@ -100,21 +103,26 @@ export class CheckOutComponent implements OnInit {
       zip: this.checkoutForm.zip.value,
       country: this.checkoutForm.country.value,
       phone: this.checkoutForm.phone.value,
-      status: 0,
+      status: 'Pending',
       user: this.userId,
       dateOrdered: `${Date.now()}`,
     };
 
-    this.orderService.createOrder(order).subscribe(
-      () => {
-        //redirect to thank you page // payment
-        this.cartService.emptyCart();
-        this.router.navigate(['/success']);
-      },
-      () => {
-        //display some message to user
-      }
-    );
+    this.orderService.cacheOrderData(order);
+    
+
+    this.orderService
+    .createCheckoutSession(this.orderItems)
+    .subscribe((session: any) => {
+      console.log(session);
+
+      this.stripeService
+        .redirectToCheckout({ sessionId: session.id })
+        .subscribe((error) => {
+          console.log(error);
+        });
+    });
+
   }
 
   get checkoutForm() {

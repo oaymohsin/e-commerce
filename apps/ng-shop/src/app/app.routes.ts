@@ -4,7 +4,12 @@ import {
   ProductsListComponent,
   ProductsPageComponent,
 } from '@e-commerce/products';
-import { CartPageComponent, CheckOutComponent } from '@e-commerce/orders';
+import {
+  CartPageComponent,
+  CheckOutComponent,
+  ThankYouComponent,
+} from '@e-commerce/orders';
+import { AuthGuardService, LoginComponent } from '@e-commerce/users';
 
 export const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
@@ -12,5 +17,11 @@ export const appRoutes: Route[] = [
   { path: 'category/:categoryid', component: ProductsListComponent },
   { path: 'products/:productId', component: ProductsPageComponent },
   { path: 'cart', component: CartPageComponent },
-  { path: 'checkout', component: CheckOutComponent },
+  {
+    path: 'checkout',
+    canActivate: [AuthGuardService],
+    component: CheckOutComponent,
+  },
+  { path: 'success', component: ThankYouComponent },
+  { path: 'login', component: LoginComponent },
 ];

@@ -14,12 +14,16 @@ import { ProductService } from '@e-commerce/products';
 })
 export class OrderSummaryComponent implements OnInit {
   totalPrice: number | any;
-
+  isCheckout = false;
   constructor(
     private router: Router,
     private cartService: CartService,
     private productService: ProductService
-  ) {}
+  ) {
+    this.router.url.includes('checkout')
+      ? (this.isCheckout = true)
+      : (this.isCheckout = false);
+  }
 
   ngOnInit(): void {
     this._getOrderSummary();
@@ -40,5 +44,7 @@ export class OrderSummaryComponent implements OnInit {
     });
   }
 
-  navigateToCheckout() {}
+  navigateToCheckout() {
+    this.router.navigate(['/checkout']);
+  }
 }

@@ -59,10 +59,10 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     console.log('checkout page initialized');
 
     this._initCheckoutForm();
-    this._setUserValuesToCheckoutForm();
 
     this._getCartItems();
     this._getCountries();
+    this._setUserValuesToCheckoutForm();
 
     // this.loggedInUserDataSubscription =
     //   this.authService.LoggedInUserData.subscribe((user: any) => {
@@ -84,23 +84,23 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   }
 
   private _setUserValuesToCheckoutForm() {
-    const loggeInUser = localStorage.getItem('user');
-    console.log(loggeInUser);
-    // this.loggedInUserDataSubscription = this.authService
-    //   .userObservable()
-    //   .subscribe((user: any) => {
-    //     // if (user) {
-    //     console.log(`user from observable ${user}`);
-    // this.checkoutFormGroup.name.setValue(user.name);
-    // this.checkoutFormGroup.email.setValue(user.email);
-    // this.checkoutFormGroup.phone.setValue(user.phone);
-    // this.checkoutFormGroup.city.setValue(user.city);
-    // this.checkoutFormGroup.country.setValue(user.country);
-    // this.checkoutFormGroup.zip.setValue(user.zip);
-    // this.checkoutFormGroup.apartment.setValue(user.apartment);
-    // this.checkoutFormGroup.street.setValue(user.street);
+    const user: any = localStorage.getItem('user');
+    // console.log(loggeInUser);
+    console.log(this.checkoutFormGroup)
+    // if (user) {
+      // console.log(`user from observable ${user}`);
+
+      this.checkoutFormGroup.get('name').setValue(user.name);
+      this.checkoutFormGroup.get('email').setValue(user.email)
+      // this.checkoutFormGroup.name.setValue(user.name);
+      // this.checkoutFormGroup.email.setValue(user.email);
+      // this.checkoutFormGroup.phone.setValue(user.phone);
+      // this.checkoutFormGroup.city.setValue(user.city);
+      // this.checkoutFormGroup.country.setValue(user.country);
+      // this.checkoutFormGroup.zip.setValue(user.zip);
+      // this.checkoutFormGroup.apartment.setValue(user.apartment);
+      // this.checkoutFormGroup.street.setValue(user.street);
     // }
-    // });
   }
 
   private _getCartItems() {

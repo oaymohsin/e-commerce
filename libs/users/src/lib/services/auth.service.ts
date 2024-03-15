@@ -3,24 +3,34 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { environment } from '@env/environment';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   apiURLUsers = environment.apiUrl + 'users';
-  constructor(private http: HttpClient, private router: Router,private token:LocalStorageService) {}
 
+  
 
-login(email:string,password:string):Observable<User>{
-  return this.http.post<User>(`${this.apiURLUsers}/userLogin`,{email,password})
-}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private token: LocalStorageService
+  ) {}
 
-logOut(){
-  this.token.removeToken()
-  this.router.navigate(['/login']);
+  // addData() {
+  //   this.LoggedInUserData.next('my name is logged in user data');
+  // }
+  login(email: string, password: string){
+    return this.http.post<User>(`${this.apiURLUsers}/userLogin`, {
+      email,
+      password,
+    });
+  }
 
-}
-
+  logOut() {
+    this.token.removeToken();
+    this.router.navigate(['/login']);
+  }
 }

@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AuthService } from '../../services/auth.service';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'e-commerce-login',
@@ -24,11 +26,11 @@ export class LoginComponent {
   loginFormGroup: FormGroup | any;
   isSubmitted = false;
   authError = false;
-  authMessage='Email or Password are wrong'
+  authMessage = 'Email or Password are wrong';
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService:AuthService,
+    private authService: AuthService,
     private localStorageService: LocalStorageService,
     private router: Router
   ) {
@@ -50,17 +52,19 @@ export class LoginComponent {
 
     this.authService
       .login(this.loginForm.email.value, this.loginForm.password.value)
-      .subscribe((response: any) => {
-        this.authError = false;
-        this.localStorageService.setToken(response.token);
-        this.router.navigate(['/']);
-      },
-      (error:HttpErrorResponse)=>{
-        this.authError=true;
-        if(error.status!=400){
-          this.authMessage="Error in the Server, please try again later!"
+      .subscribe(
+        (response: any) => {
+          this.authError = false;
+          this.localStorageService.setToken(response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          this.router.navigate(['/']);
+        },
+        (error: HttpErrorResponse) => {
+          this.authError = true;
+          if (error.status != 400) {
+            this.authMessage = 'Error in the Server, please try again later!';
+          }
         }
-      }
       );
   }
 

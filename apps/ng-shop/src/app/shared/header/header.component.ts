@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CartService } from '@e-commerce/orders';
+import { AuthService } from '@e-commerce/users';
 // import { CommonModule } from '@angular/common';
 // import { AccordionModule } from 'primeng/accordion';
 
@@ -11,7 +12,8 @@ import { CartService } from '@e-commerce/orders';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  constructor(private cartService:CartService){
+  constructor(private cartService:CartService,private authService:AuthService){
     this.cartService.initCartLocalStorage()
+   
   }
 }

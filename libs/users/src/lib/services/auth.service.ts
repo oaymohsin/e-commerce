@@ -18,7 +18,7 @@ export class AuthService {
     private router: Router,
     private token: LocalStorageService
   ) {}
-
+// comment added
   // addData() {
   //   this.LoggedInUserData.next('my name is logged in user data');
   // }

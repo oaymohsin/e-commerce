@@ -84,23 +84,20 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   }
 
   private _setUserValuesToCheckoutForm() {
-    const user: any = localStorage.getItem('user');
-    // console.log(loggeInUser);
-    console.log(this.checkoutFormGroup)
-    // if (user) {
-      // console.log(`user from observable ${user}`);
-
+    const userData = localStorage.getItem('user');
+    const user: any = userData ? JSON.parse(userData) : {};
+    // console.log(user);
+    // console.log(parsedUser);
+    if (user) {
       this.checkoutFormGroup.get('name').setValue(user.name);
-      this.checkoutFormGroup.get('email').setValue(user.email)
-      // this.checkoutFormGroup.name.setValue(user.name);
-      // this.checkoutFormGroup.email.setValue(user.email);
-      // this.checkoutFormGroup.phone.setValue(user.phone);
-      // this.checkoutFormGroup.city.setValue(user.city);
-      // this.checkoutFormGroup.country.setValue(user.country);
-      // this.checkoutFormGroup.zip.setValue(user.zip);
-      // this.checkoutFormGroup.apartment.setValue(user.apartment);
-      // this.checkoutFormGroup.street.setValue(user.street);
-    // }
+      this.checkoutFormGroup.get('email').setValue(user.email);
+      this.checkoutFormGroup.get('phone').setValue(user.phone);
+      this.checkoutFormGroup.get('city').setValue(user.city);
+      this.checkoutFormGroup.get('country').setValue(user.country);
+      this.checkoutFormGroup.get('zip').setValue(user.zip);
+      this.checkoutFormGroup.get('apartment').setValue(user.apartment);
+      this.checkoutFormGroup.get('street').setValue(user.street);
+    }
   }
 
   private _getCartItems() {

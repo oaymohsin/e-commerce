@@ -44,7 +44,6 @@ import { NgxStripeModule } from 'ngx-stripe';
     SliderComponent,
     UiComponent,
     FooterComponent,
-    ProductsSearchComponent,
     NavComponent,
   ],
   imports: [
@@ -66,6 +65,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     CheckOutComponent,
     ThankYouComponent,
     LoginComponent,
+    ProductsSearchComponent,
 
     NgxStripeModule.forRoot(
       'pk_test_51OtRDuSBR6ewkHIDpLTJc624qoX30grIza7C30DUvROMOdmtLAK9zCORCWDbRbr29VWbGHWmkJ0o7Fi6Bfk2xLcZ009akKk5Eu'

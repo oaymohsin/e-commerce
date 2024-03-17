@@ -1,26 +1,37 @@
-.products-search{
-    display: flex;
+.products-search {
+  display: flex;
   background-color: var(--surface-200);
-    border-radius: 10px;
-    width: 275px;
-    height: 35px;
+  border-radius: 10px;
+  width: 275px;
+  height: 35px;
 
-    .pi{
-        width: 25px;
-        font-size: 1.3em;
-        color: $primary-color;
-        margin-top: 10px;
-        margin-left: 10px;
-    }
-    &-input{
-        height: 35px;
-        background-color: transparent;
-        color: var(surface-600);
+  .pi {
+    width: 25px;
+    font-size: 1.3em;
+    color: $primary-color;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  form {
+    .products-search-input {
+      height: 5px;
+      width: 100px;
+
+      background-color: transparent;
+      color: var(surface-600);
+      border: 0;
+
+      &:focus,
+      &:active {
         border: 0;
-
-        &:focus,&:active{
-            border: 0;
-            outline: none;
-        }
+        outline: none;
+      }
     }
+  }
 }
+
+::ng-deep .p-autocomplete-input {
+    /* Your custom styles here */
+    width: 500px;
+  }
+  

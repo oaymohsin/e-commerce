@@ -1,9 +1,22 @@
 <div class="products-search">
-    <i class="pi pi-search mr-2"></i>
-    <input type="text"
+  <i class="pi pi-search mr-2"></i>
+  <!-- <input
+    type="text"
     placeholder="Find products"
     class="products-search-input"
     name="search"
     id="search"
-    >
+  /> -->
+  <form [formGroup]="searchForm">
+    <p-autoComplete
+      placeholder="Find products"
+    class="px-3 "
+      formControlName="searchProduct"
+      [suggestions]="filteredProducts"
+      (completeMethod)="filterProduct($event)"
+      field="name"
+      (onSelect)="onProductSelect($event)"
+      
+    ></p-autoComplete>
+  </form>
 </div>

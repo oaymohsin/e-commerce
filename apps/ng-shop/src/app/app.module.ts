@@ -15,7 +15,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AccordionModule } from 'primeng/accordion';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HomePageComponent } from './home-page/home-page.component';
 import {
   CategoriesBannerComponent,
@@ -32,8 +32,9 @@ import {
   CheckOutComponent,
   ThankYouComponent,
 } from '@e-commerce/orders';
-import { AuthService, LoginComponent } from '@e-commerce/users';
+import { AuthService, LoginComponent, jwtInterceptor } from '@e-commerce/users';
 import { NgxStripeModule } from 'ngx-stripe';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +72,8 @@ import { NgxStripeModule } from 'ngx-stripe';
       'pk_test_51OtRDuSBR6ewkHIDpLTJc624qoX30grIza7C30DUvROMOdmtLAK9zCORCWDbRbr29VWbGHWmkJ0o7Fi6Bfk2xLcZ009akKk5Eu'
     ),
   ],
-  providers: [CheckOutComponent, AuthService, ProductsPageComponent],
+  providers: [CheckOutComponent, AuthService, ProductsPageComponent,{provide:LocationStrategy,useClass:HashLocationStrategy},
+    {provide:HTTP_INTERCEPTORS, useClass:jwtInterceptor,multi:true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

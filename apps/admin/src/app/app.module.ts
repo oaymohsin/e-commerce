@@ -37,6 +37,7 @@ import { OrdersDetailComponent } from './orders/orders-detail/orders-detail.comp
 import { OrdersListComponent } from './orders/orders-list/orders-list.component';
 import { FieldsetModule } from 'primeng/fieldset';
 import { jwtInterceptor } from '@e-commerce/users';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +78,7 @@ import { jwtInterceptor } from '@e-commerce/users';
     InputMaskModule,
     FieldsetModule
   ],
-  providers: [CategoryService, MessageService, ConfirmationService,
+  providers: [CategoryService, MessageService, ConfirmationService,{provide:LocationStrategy,useClass:HashLocationStrategy},
   {provide:HTTP_INTERCEPTORS, useClass:jwtInterceptor,multi:true}
   ],
   bootstrap: [AppComponent],
